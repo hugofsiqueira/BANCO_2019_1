@@ -10,6 +10,35 @@ public class Conta {
 	private LocalDate dataAbertura;
 	private TipoConta tipo;
 	
+	public Conta() {
+		saldo = 1000;
+	}
+	
+	public Conta(String numero) {
+		this.numero = numero;
+	}
+	
+	public void creditar(double valor) {
+		saldo = saldo + valor;
+	}
+	
+	public void debitar(double valor) {
+		if(valor <= saldo) {
+			saldo = saldo - valor;
+		}else {
+			System.out.println("Saldo insuficiente");
+		}
+	}
+	
+	public void transferir(Conta contaDestino, double valor) {
+		if(valor <= saldo) {
+			debitar(valor);
+			contaDestino.creditar(valor);
+		}else {
+			System.out.println("Saldo insuficiente");
+		}
+	}
+	
 	public String getNumero() {
 		return numero;
 	}
