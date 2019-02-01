@@ -3,11 +3,22 @@ package com.qualiti.banco.dados;
 import com.qualiti.banco.modelo.Conta;
 
 public class ContaDAOArrayImpl implements ContaDAO {
+	
+	private Conta[] bancoContas;
+	private int indice;
+	
+	public ContaDAOArrayImpl() {
+		bancoContas = new Conta[1000];
+	}
 
 	@Override
 	public void inserir(Conta conta) {
-		// TODO Auto-generated method stub
-		
+		if(indice < 1000) {
+			bancoContas[indice] = conta;
+			indice++;
+		}else {
+			System.out.println("Limite de contas atingido!!!");
+		}
 	}
 
 	@Override
