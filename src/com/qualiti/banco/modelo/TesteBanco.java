@@ -3,13 +3,32 @@ package com.qualiti.banco.modelo;
 public class TesteBanco {
 
 	public static void main(String[] args) {
-		Conta c1 = new Conta();
+		Conta c1 = new Conta("1111-2");
+		Cliente cli2 = new Cliente("Ana Maria", "088");
+		
+		c1.setSaldo(2000);
+		c1.setCliente(cli2);
+		
+		System.out.println(c1);
 		
 		Conta c3 = new Conta("8888-9");
 		
+		if(c1.getNumero().equals(c3.getNumero())) {
+			
+		}
+		if(c1.equals(c3)) {
+			System.out.println("c1 e c3 sao iguais");
+		}else {
+			System.out.println("c1 e c3 sao diferentes");
+		}
+		
 		Cliente cli = new Cliente();
 		
-		Cliente cli2 = new Cliente("Ana Maria", "088");
+		
+		
+		if(cli.equals(cli2)) {
+			
+		}
 		
 		Poupanca p = new Poupanca();
 		p.setSaldo(1000);
