@@ -1,9 +1,9 @@
-package com.qualiti.banco.dados;
+package com.qualiti.banco.negocio;
 
 import com.qualiti.banco.modelo.Conta;
 import com.qualiti.banco.modelo.TipoConta;
 
-public interface ContaDAO {
+public interface ContaBO {
 	
 	void inserir(Conta conta);
 	void atualizar(Conta conta);
