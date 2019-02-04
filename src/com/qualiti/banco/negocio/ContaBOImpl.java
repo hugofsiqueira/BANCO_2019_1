@@ -106,4 +106,113 @@ public class ContaBOImpl implements ContaBO {
 		return repositorio.recuperarSaldoTotalContas(tipo);
 	}
 
+	@Override
+	public void creditar(String numero, double valor) {
+		if(numero == null || numero.isEmpty()) {
+			System.out.println("Número da conta deve ser informado");
+			return;
+		}
+		
+		if(numero.length() != 6) {
+			System.out.println("Número de conta inválido");
+			return;
+		}
+		
+		if(valor <= 0) {
+			System.out.println("Valor para crédito deve ser maior que zero");
+			return;
+		}
+		
+		Conta contaRetorno = repositorio.procurar(numero);
+		
+		if(contaRetorno != null) {
+			
+			contaRetorno.creditar(valor);
+			repositorio.atualizar(contaRetorno);
+	
+		}else {
+			System.out.println("Numero da conta não existe");
+		}
+		
+		
+	}
+
+	@Override
+	public void debitar(String numero, double valor) {
+		if(numero == null || numero.isEmpty()) {
+			System.out.println("Número da conta deve ser informado");
+			return;
+		}
+		
+		if(numero.length() != 6) {
+			System.out.println("Número de conta inválido");
+			return;
+		}
+		
+		if(valor <= 0) {
+			System.out.println("Valor para crédito deve ser maior que zero");
+			return;
+		}
+		
+		Conta contaRetorno = repositorio.procurar(numero);
+		
+		if(contaRetorno != null) {
+			
+			contaRetorno.debitar(valor);
+			repositorio.atualizar(contaRetorno);
+	
+		}else {
+			System.out.println("Numero da conta não existe");
+		}
+	}
+
+	@Override
+	public void transferir(String numeroFonte, String numeroDestino, double valor) {
+		if(numeroFonte == null || numeroFonte.isEmpty()) {
+			System.out.println("Número da conta de origem deve ser informado");
+			return;
+		}
+		
+		if(numeroFonte.length() != 6) {
+			System.out.println("Número da conta de origem inválido");
+			return;
+		}
+		
+		if(numeroDestino == null || numeroDestino.isEmpty()) {
+			System.out.println("Número da conta de destino deve ser informado");
+			return;
+		}
+		
+		if(numeroDestino.length() != 6) {
+			System.out.println("Número da conta de destino inválido");
+			return;
+		}
+		
+		if(valor <= 0) {
+			System.out.println("Valor para crédito deve ser maior que zero");
+			return;
+		}
+		
+		Conta contaOrigem = repositorio.procurar(numeroFonte);
+		
+		if(contaOrigem != null) {
+			
+			Conta contaDestino = repositorio.procurar(numeroDestino);
+			
+			if(contaDestino != null) {
+				
+				contaOrigem.transferir(contaDestino, valor);
+				repositorio.atualizar(contaDestino);
+				repositorio.atualizar(contaOrigem);
+				
+			}else {
+				System.out.println("Numero da conta destino não existe");
+			}
+			
+		}else {
+			System.out.println("Numero da conta origem não existe");
+		}
+		
+	}
+
 }

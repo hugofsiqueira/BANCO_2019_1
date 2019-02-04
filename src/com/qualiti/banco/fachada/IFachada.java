@@ -12,6 +12,9 @@ public interface IFachada {
 	Conta procurarConta(String numero);
 	String gerarRelatorioContas();
 	double recuperarSaldoTotalContas(TipoConta tipo);
+	void creditar(String numero, double valor);
+	void debitar(String numero, double valor);
+	void transferir(String numeroFonte, String numeroDestino, double valor);
 	
 	void inserirCliente(Cliente cliente);
 	void atualizarCliente(Cliente cliente);

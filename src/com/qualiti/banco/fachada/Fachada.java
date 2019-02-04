@@ -75,4 +75,19 @@ public class Fachada implements IFachada {
 		return negocioClientes.procurar(cpf);
 	}
 
+	@Override
+	public void creditar(String numero, double valor) {
+		negocioContas.creditar(numero, valor);
+	}
+
+	@Override
+	public void debitar(String numero, double valor) {
+		negocioContas.debitar(numero, valor);
+	}
+
+	@Override
+	public void transferir(String numeroFonte, String numeroDestino, double valor) {
+		negocioContas.transferir(numeroFonte, numeroDestino, valor);
+	}
+
 }
