@@ -4,6 +4,7 @@ import com.qualiti.banco.dados.ClienteDAO;
 import com.qualiti.banco.dados.ClienteDAOArrayImpl;
 import com.qualiti.banco.dados.ContaDAO;
 import com.qualiti.banco.dados.ContaDAOArrayImpl;
+import com.qualiti.banco.excecoes.BancoException;
 import com.qualiti.banco.modelo.Cliente;
 import com.qualiti.banco.modelo.Conta;
 import com.qualiti.banco.modelo.TipoConta;
@@ -26,22 +27,22 @@ public class Fachada implements IFachada {
 	}
 
 	@Override
-	public void inserirConta(Conta conta) {
+	public void inserirConta(Conta conta) throws BancoException {
 		negocioContas.inserir(conta);
 	}
 
 	@Override
-	public void atualizarConta(Conta conta) {
+	public void atualizarConta(Conta conta) throws BancoException {
 		negocioContas.atualizar(conta);
 	}
 
 	@Override
-	public void removerConta(String numero) {
+	public void removerConta(String numero) throws BancoException {
 		negocioContas.remover(numero);
 	}
 
 	@Override
-	public Conta procurarConta(String numero) {
+	public Conta procurarConta(String numero) throws BancoException {
 		return negocioContas.procurar(numero);
 	}
 
@@ -56,37 +57,38 @@ public class Fachada implements IFachada {
 	}
 
 	@Override
-	public void inserirCliente(Cliente cliente) {
+	public void inserirCliente(Cliente cliente) throws BancoException {
 		negocioClientes.inserir(cliente);
 	}
 
 	@Override
-	public void atualizarCliente(Cliente cliente) {
+	public void atualizarCliente(Cliente cliente) throws BancoException {
 		negocioClientes.atualizar(cliente);
 	}
 
 	@Override
-	public void removerCliente(String cpf) {
+	public void removerCliente(String cpf) throws BancoException {
 		negocioClientes.remover(cpf);
 	}
 
 	@Override
-	public Cliente procurar(String cpf) {
+	public Cliente procurar(String cpf) throws BancoException {
 		return negocioClientes.procurar(cpf);
 	}
 
 	@Override
-	public void creditar(String numero, double valor) {
+	public void creditar(String numero, double valor) throws BancoException {
 		negocioContas.creditar(numero, valor);
 	}
 
 	@Override
-	public void debitar(String numero, double valor) {
+	public void debitar(String numero, double valor) throws BancoException {
 		negocioContas.debitar(numero, valor);
 	}
 
 	@Override
-	public void transferir(String numeroFonte, String numeroDestino, double valor) {
+	public void transferir(String numeroFonte, String numeroDestino, 
+			double valor) throws BancoException {
 		negocioContas.transferir(numeroFonte, numeroDestino, valor);
 	}
 

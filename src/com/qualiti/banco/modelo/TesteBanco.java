@@ -1,8 +1,10 @@
 package com.qualiti.banco.modelo;
 
+import com.qualiti.banco.excecoes.BancoException;
+
 public class TesteBanco {
 
-	public static void main(String[] args) {
+	public static void main(String[] args)  {
 		Conta c1 = new Conta("1111-2");
 		Cliente cli2 = new Cliente("Ana Maria", "088");
 		
@@ -41,7 +43,15 @@ public class TesteBanco {
 		System.out.println("BONUS CB: "+cb1.getBonus());
 		
 		p.creditar(500);
-		p.debitar(200);
+		try {
+			p.debitar(200);
+			System.out.println("Debito realizado com sucesso");
+		} catch (BancoException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			System.out.println("Volte sempre");
+		}
+		
 		p.renderJuros(0.1);
 		
 		c1.setNumero("1234-x");
@@ -52,7 +62,12 @@ public class TesteBanco {
 		c2.setNumero("3456-1");
 		c2.setSaldo(2000);
 		
-		c2.debitar(500);
+		try {
+			c2.debitar(500);
+		} catch (BancoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		System.out.println("Saldo C2 = "+c2.getSaldo());
 		
@@ -61,13 +76,23 @@ public class TesteBanco {
 		c1.setSaldo(1000);
 		c2.setSaldo(1000);
 		
-		c1.transferir(c2, 500);
+		try {
+			c1.transferir(c2, 500);
+		} catch (BancoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		System.out.println("Saldo C2 = "+c2.getSaldo());
 		
 		System.out.println("Saldo C1 =  "+c1.getSaldo());
 		
-		c1.transferir(c2, 1000);
+		try {
+			c1.transferir(c2, 1000);
+		} catch (BancoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		System.out.println("Saldo C2 = "+c2.getSaldo());
 		

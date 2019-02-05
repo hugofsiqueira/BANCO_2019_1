@@ -1,6 +1,7 @@
 package com.qualiti.banco.negocio;
 
 import com.qualiti.banco.dados.ClienteDAO;
+import com.qualiti.banco.excecoes.BancoException;
 import com.qualiti.banco.modelo.Cliente;
 
 public class ClienteBOImpl implements ClienteBO {
@@ -12,65 +13,57 @@ public class ClienteBOImpl implements ClienteBO {
 	}
 
 	@Override
-	public void inserir(Cliente cliente) {
+	public void inserir(Cliente cliente) throws BancoException {
 		if(cliente == null) {
-			System.out.println("Objeto Cliente null");
-			return;
+			throw new BancoException("Objeto Cliente null");
 		}
 		
 		if(cliente.getCpf() == null || cliente.getCpf().isEmpty()) {
-			System.out.println("CPF deve ser informado");
-			return;
+			throw new BancoException("CPF deve ser informado");
 		}
 		
 		if(cliente.getCpf().length() != 14) {
-			System.out.println("CPF inválido");
-			return;
+			throw new BancoException("CPF inválido");
 		}
 		
 		Cliente clienteBusca = repositorio.procurar(cliente.getCpf());
 		if(clienteBusca == null) {
 			repositorio.inserir(cliente);
 		}else {
-			System.out.println("CPF já cadastrado");
+			throw new BancoException("CPF já cadastrado");
 		}
 	}
 
 	@Override
-	public void atualizar(Cliente cliente) {
+	public void atualizar(Cliente cliente) throws BancoException {
 		if(cliente == null) {
-			System.out.println("Objeto Cliente null");
-			return;
+			throw new BancoException("Objeto Cliente null");
 		}
 		
 		if(cliente.getCpf() == null || cliente.getCpf().isEmpty()) {
-			System.out.println("CPF deve ser informado");
-			return;
+			throw new BancoException("CPF deve ser informado");
 		}
 		
 		if(cliente.getCpf().length() != 14) {
-			System.out.println("CPF inválido");
-			return;
+			throw new BancoException("CPF inválido");
 		}
 		
 		Cliente clienteBusca = repositorio.procurar(cliente.getCpf());
 		if(clienteBusca != null) {
 			repositorio.atualizar(cliente);
 		}else {
-			System.out.println("CPF não cadastrado");
+			throw new BancoException("CPF não cadastrado");
 		}
 	}
 
 	@Override
-	public void remover(String cpf) {
+	public void remover(String cpf) throws BancoException {
 		if(cpf == null || cpf.isEmpty()) {
-			System.out.println("CPF deve ser informado");
-			return;
+			throw new BancoException("CPF deve ser informado");
 		}
 		
 		if(cpf.length() != 14) {
-			System.out.println("CPF inválido");
-			return;
+			throw new BancoException("CPF inválido");
 		}
 		
 		repositorio.remover(cpf);
@@ -78,15 +71,13 @@ public class ClienteBOImpl implements ClienteBO {
 	}
 
 	@Override
-	public Cliente procurar(String cpf) {
+	public Cliente procurar(String cpf) throws BancoException {
 		if(cpf == null || cpf.isEmpty()) {
-			System.out.println("CPF deve ser informado");
-			return null;
+			throw new BancoException("CPF deve ser informado");
 		}
 		
 		if(cpf.length() != 14) {
-			System.out.println("CPF inválido");
-			return null;
+			throw new BancoException("CPF inválido");
 		}
 		
 		return repositorio.procurar(cpf);

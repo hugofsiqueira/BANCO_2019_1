@@ -2,6 +2,8 @@ package com.qualiti.banco.modelo;
 
 import java.time.LocalDate;
 
+import com.qualiti.banco.excecoes.BancoException;
+
 public class Conta {
 	
 	private String numero;
@@ -34,21 +36,18 @@ public class Conta {
 		saldo = saldo + valor;
 	}
 	
-	public void debitar(double valor) {
+	public void debitar(double valor) throws BancoException {
 		if(valor <= saldo) {
 			saldo = saldo - valor;
 		}else {
-			System.out.println("Saldo insuficiente");
+			throw new BancoException("Saldo insuficiente");
 		}
 	}
 	
-	public void transferir(Conta contaDestino, double valor) {
-		if(valor <= saldo) {
-			debitar(valor);
-			contaDestino.creditar(valor);
-		}else {
-			System.out.println("Saldo insuficiente");
-		}
+	public void transferir(Conta contaDestino, double valor) 
+																				throws BancoException {
+		debitar(valor);
+		contaDestino.creditar(valor);
 	}
 	
 	@Override

@@ -1,6 +1,7 @@
 package com.qualiti.banco.negocio;
 
 import com.qualiti.banco.dados.ContaDAO;
+import com.qualiti.banco.excecoes.BancoException;
 import com.qualiti.banco.modelo.Conta;
 import com.qualiti.banco.modelo.TipoConta;
 
@@ -13,68 +14,60 @@ public class ContaBOImpl implements ContaBO {
 	}
 
 	@Override
-	public void inserir(Conta conta) {
+	public void inserir(Conta conta) throws BancoException {
 		if(conta == null) {
-			System.out.println("Objeto Conta null");
-			return;
+			throw new BancoException("Objeto Conta null");
 		}
 		
 		if(conta.getNumero() == null || conta.getNumero().isEmpty()) {
-			System.out.println("Número da conta deve ser informado");
-			return;
+			throw new BancoException("Número da conta deve ser informado");
 		}
 		
 		if(conta.getNumero().length() != 6) {
-			System.out.println("Número de conta inválido");
-			return;
+			throw new BancoException("Número de conta inválido");
 		}
 		
 		Conta contaBusca = repositorio.procurar(conta.getNumero());
 		if(contaBusca == null) { 
 			repositorio.inserir(conta);
 		}else {
-			System.out.println("Número de conta já cadastrado");
+			throw new BancoException("Número de conta já cadastrado");
 		}
 		
 	}
 
 	@Override
-	public void atualizar(Conta conta) {
+	public void atualizar(Conta conta) throws BancoException {
 		if(conta == null) {
-			System.out.println("Objeto Conta null");
-			return;
+			throw new BancoException("Objeto Conta null");
 		}
 		
 		if(conta.getNumero() == null || conta.getNumero().isEmpty()) {
-			System.out.println("Número da conta deve ser informado");
-			return;
+			throw new BancoException("Número da conta deve ser informado");
 		}
 		
 		if(conta.getNumero().length() != 6) {
-			System.out.println("Número de conta inválido");
-			return;
+			throw new BancoException("Número de conta inválido");
 		}
 		
 		Conta contaBusca = repositorio.procurar(conta.getNumero());
 		if(contaBusca != null) { 
 			repositorio.atualizar(conta);
 		}else {
-			System.out.println("Número de conta não existe");
+			throw new BancoException("Número de conta não existe");
 		}
 		
 	}
 
 	@Override
-	public void remover(String numero) {
+	public void remover(String numero) throws BancoException {
 		
 		if(numero == null || numero.isEmpty()) {
-			System.out.println("Número da conta deve ser informado");
-			return;
+			throw new BancoException("Número da conta deve ser informado");
 		}
 		
 		if(numero.length() != 6) {
-			System.out.println("Número de conta inválido");
-			return;
+			throw new BancoException("Número de conta inválido");
 		}
 		
 		repositorio.remover(numero);
@@ -82,15 +75,13 @@ public class ContaBOImpl implements ContaBO {
 	}
 
 	@Override
-	public Conta procurar(String numero) {
+	public Conta procurar(String numero) throws BancoException {
 		if(numero == null || numero.isEmpty()) {
-			System.out.println("Número da conta deve ser informado");
-			return null;
+			throw new BancoException("Número da conta deve ser informado");
 		}
 		
 		if(numero.length() != 6) {
-			System.out.println("Número de conta inválido");
-			return null;
+			throw new BancoException("Número de conta inválido");
 		}
 		
 		return repositorio.procurar(numero);
@@ -107,20 +98,17 @@ public class ContaBOImpl implements ContaBO {
 	}
 
 	@Override
-	public void creditar(String numero, double valor) {
+	public void creditar(String numero, double valor) throws BancoException {
 		if(numero == null || numero.isEmpty()) {
-			System.out.println("Número da conta deve ser informado");
-			return;
+			throw new BancoException("Número da conta deve ser informado");
 		}
 		
 		if(numero.length() != 6) {
-			System.out.println("Número de conta inválido");
-			return;
+			throw new BancoException("Número de conta inválido");
 		}
 		
 		if(valor <= 0) {
-			System.out.println("Valor para crédito deve ser maior que zero");
-			return;
+			throw new BancoException("Valor para crédito deve ser maior que zero");
 		}
 		
 		Conta contaRetorno = repositorio.procurar(numero);
@@ -131,27 +119,24 @@ public class ContaBOImpl implements ContaBO {
 			repositorio.atualizar(contaRetorno);
 	
 		}else {
-			System.out.println("Numero da conta não existe");
+			throw new BancoException("Numero da conta não existe");
 		}
 		
 		
 	}
 
 	@Override
-	public void debitar(String numero, double valor) {
+	public void debitar(String numero, double valor) throws BancoException {
 		if(numero == null || numero.isEmpty()) {
-			System.out.println("Número da conta deve ser informado");
-			return;
+			throw new BancoException("Número da conta deve ser informado");
 		}
 		
 		if(numero.length() != 6) {
-			System.out.println("Número de conta inválido");
-			return;
+			throw new BancoException("Número de conta inválido");
 		}
 		
 		if(valor <= 0) {
-			System.out.println("Valor para crédito deve ser maior que zero");
-			return;
+			throw new BancoException("Valor para crédito deve ser maior que zero");
 		}
 		
 		Conta contaRetorno = repositorio.procurar(numero);
@@ -162,35 +147,31 @@ public class ContaBOImpl implements ContaBO {
 			repositorio.atualizar(contaRetorno);
 	
 		}else {
-			System.out.println("Numero da conta não existe");
+			throw new BancoException("Numero da conta não existe");
 		}
 	}
 
 	@Override
-	public void transferir(String numeroFonte, String numeroDestino, double valor) {
+	public void transferir(String numeroFonte,
+			String numeroDestino, double valor) throws BancoException {
 		if(numeroFonte == null || numeroFonte.isEmpty()) {
-			System.out.println("Número da conta de origem deve ser informado");
-			return;
+			throw new BancoException("Número da conta de origem deve ser informado");
 		}
 		
 		if(numeroFonte.length() != 6) {
-			System.out.println("Número da conta de origem inválido");
-			return;
+			throw new BancoException("Número da conta de origem inválido");
 		}
 		
 		if(numeroDestino == null || numeroDestino.isEmpty()) {
-			System.out.println("Número da conta de destino deve ser informado");
-			return;
+			throw new BancoException("Número da conta de destino deve ser informado");
 		}
 		
 		if(numeroDestino.length() != 6) {
-			System.out.println("Número da conta de destino inválido");
-			return;
+			throw new BancoException("Número da conta de destino inválido");
 		}
 		
 		if(valor <= 0) {
-			System.out.println("Valor para crédito deve ser maior que zero");
-			return;
+			throw new BancoException("Valor para crédito deve ser maior que zero");
 		}
 		
 		Conta contaOrigem = repositorio.procurar(numeroFonte);
@@ -206,11 +187,11 @@ public class ContaBOImpl implements ContaBO {
 				repositorio.atualizar(contaOrigem);
 				
 			}else {
-				System.out.println("Numero da conta destino não existe");
+				throw new BancoException("Numero da conta destino não existe");
 			}
 			
 		}else {
-			System.out.println("Numero da conta origem não existe");
+			throw new BancoException("Numero da conta origem não existe");
 		}
 		
 	}
