@@ -1,9 +1,9 @@
 package com.qualiti.banco.fachada;
 
 import com.qualiti.banco.dados.ClienteDAO;
-import com.qualiti.banco.dados.ClienteDAOArrayImpl;
 import com.qualiti.banco.dados.ContaDAO;
-import com.qualiti.banco.dados.ContaDAOArrayImpl;
+import com.qualiti.banco.dados.list.ClienteDAOListImpl;
+import com.qualiti.banco.dados.list.ContaDAOListImpl;
 import com.qualiti.banco.excecoes.BancoException;
 import com.qualiti.banco.modelo.Cliente;
 import com.qualiti.banco.modelo.Conta;
@@ -17,13 +17,23 @@ public class Fachada implements IFachada {
 	
 	private ContaBO negocioContas;
 	private ClienteBO negocioClientes;
+	private static IFachada fachadaInstanciada;
 	
-	public Fachada() {
-		ContaDAO contaDAO = new ContaDAOArrayImpl();
-		ClienteDAO clienteDAO = new ClienteDAOArrayImpl();
+	private Fachada() {
+		ContaDAO contaDAO = new ContaDAOListImpl();
+		ClienteDAO clienteDAO = new ClienteDAOListImpl();
 		
 		negocioContas = new ContaBOImpl(contaDAO);
 		negocioClientes = new ClienteBOImpl(clienteDAO);
+	}
+	
+	public static IFachada getFachada() {
+		
+		if(fachadaInstanciada == null) {
+			fachadaInstanciada = new Fachada();
+		}
+		
+		return fachadaInstanciada;
 	}
 
 	@Override

@@ -1,5 +1,6 @@
-package com.qualiti.banco.dados;
+package com.qualiti.banco.dados.array;
 
+import com.qualiti.banco.dados.ClienteDAO;
 import com.qualiti.banco.modelo.Cliente;
 
 public class ClienteDAOArrayImpl implements ClienteDAO {

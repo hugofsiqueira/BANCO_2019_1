@@ -2,6 +2,7 @@ package com.qualiti.banco.gui;
 
 import com.qualiti.banco.excecoes.BancoException;
 import com.qualiti.banco.fachada.Fachada;
+import com.qualiti.banco.fachada.IFachada;
 import com.qualiti.banco.modelo.Conta;
 import com.qualiti.banco.modelo.Poupanca;
 import com.qualiti.banco.modelo.TipoConta;
@@ -18,7 +19,7 @@ public class BancoTeste {
 		p.setNumero("129");
 		p.setSaldo(8000);
 		
-		Fachada fachada = new Fachada();
+		IFachada fachada = Fachada.getFachada();
 		
 		try {
 			fachada.inserirConta(c);

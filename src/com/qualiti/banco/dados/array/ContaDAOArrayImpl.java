@@ -1,5 +1,6 @@
-package com.qualiti.banco.dados;
+package com.qualiti.banco.dados.array;
 
+import com.qualiti.banco.dados.ContaDAO;
 import com.qualiti.banco.modelo.Conta;
 import com.qualiti.banco.modelo.Poupanca;
 import com.qualiti.banco.modelo.TipoConta;
