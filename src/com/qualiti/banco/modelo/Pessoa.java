@@ -2,7 +2,7 @@ package com.qualiti.banco.modelo;
 
 import java.time.LocalDate;
 
-public abstract class Pessoa {
+public abstract class Pessoa extends BancoEntity<String>{
 	
 	private String nome;
 	private String cpf;

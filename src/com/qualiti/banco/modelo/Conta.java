@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import com.qualiti.banco.excecoes.BancoException;
 
-public class Conta {
+public class Conta extends BancoEntity<String>{
 	
 	private String numero;
 	private double saldo;
@@ -104,5 +104,10 @@ public class Conta {
 	}
 	public void setTipo(TipoConta tipo) {
 		this.tipo = tipo;
+	}
+
+	@Override
+	public String getChave() {
+		return numero;
 	}
 }
