@@ -1,7 +1,8 @@
 package com.qualiti.banco.modelo;
 
-public class Endereco {
+public class Endereco extends BancoEntity<String>{
 	
+	private String cpf;
 	private String logradouro;
 	private String numero;
 	private String complemento;
@@ -86,5 +87,15 @@ public class Endereco {
 	}
 	public void setUf(String uf) {
 		this.uf = uf;
+	}
+	public String getCpf() {
+		return cpf;
+	}
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+	@Override
+	public String getChave() {
+		return cpf;
 	}
 }

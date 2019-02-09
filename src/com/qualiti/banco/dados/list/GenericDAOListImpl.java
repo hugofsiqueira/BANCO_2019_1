@@ -9,7 +9,7 @@ import com.qualiti.banco.modelo.BancoEntity;
 public class GenericDAOListImpl<T extends BancoEntity<CHAVE>, CHAVE> 
 															implements GenericDAO<T, CHAVE> {
 	
-	private List<T> repositorio;
+	protected List<T> repositorio;
 	
 	public GenericDAOListImpl() {
 		repositorio = new ArrayList<>();

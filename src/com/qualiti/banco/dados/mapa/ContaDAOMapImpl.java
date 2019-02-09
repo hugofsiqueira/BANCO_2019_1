@@ -1,41 +1,13 @@
 package com.qualiti.banco.dados.mapa;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.qualiti.banco.dados.ContaDAO;
 import com.qualiti.banco.modelo.Conta;
 import com.qualiti.banco.modelo.Poupanca;
 import com.qualiti.banco.modelo.TipoConta;
 
-public class ContaDAOMapImpl implements ContaDAO {
-	
-	private Map<String, Conta> repositorio;
-	
-	public ContaDAOMapImpl() {
-		repositorio = new HashMap<>();
-	}
-
-	@Override
-	public void inserir(Conta conta) {
-		repositorio.put(conta.getNumero(), conta);
-	}
-
-	@Override
-	public void atualizar(Conta conta) {
-		repositorio.put(conta.getNumero(), conta);
-	}
-
-	@Override
-	public void remover(String numero) {
-		repositorio.remove(numero);
-	}
-
-	@Override
-	public Conta procurar(String numero) {
-		return repositorio.get(numero);
-	}
-
+public class ContaDAOMapImpl extends
+									GenericDAOMapImpl<Conta, String>
+																		implements ContaDAO {
 	@Override
 	public String gerarRelatorioContas() {
 		String retorno = "";
