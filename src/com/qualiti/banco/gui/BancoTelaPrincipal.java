@@ -63,17 +63,20 @@ public class BancoTelaPrincipal {
 		});
 		mnClientes.add(mntmCadastrar);
 		
-		JMenuItem mntmVisualizar = new JMenuItem("Visualizar");
-		mnClientes.add(mntmVisualizar);
-		
 		JMenu mnContas = new JMenu("Contas");
 		menuBar.add(mnContas);
 		
 		JMenuItem mntmCadastrar_1 = new JMenuItem("Cadastrar");
+		mntmCadastrar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ContaCadastrarPanel contaPanel = new ContaCadastrarPanel();
+				frame.setContentPane(contaPanel);
+				frame.revalidate();
+				
+			}
+		});
 		mnContas.add(mntmCadastrar_1);
-		
-		JMenuItem mntmVisualizar_1 = new JMenuItem("Visualizar");
-		mnContas.add(mntmVisualizar_1);
 		
 		JMenu mnTransaes = new JMenu("Transações");
 		menuBar.add(mnTransaes);

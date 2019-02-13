@@ -17,5 +17,12 @@ public class DateUtil {
 		return date;
 		
 	}
+	
+	public static String converterDataTexto(LocalDate data) {
+		DateTimeFormatter formatter = 
+				DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		
+		return data.format(formatter);
+	}
 
 }
