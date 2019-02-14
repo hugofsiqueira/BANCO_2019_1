@@ -1,0 +1,47 @@
+  
+   create table pessoa(
+	nome varchar(300),
+    	cpf varchar(14) PRIMARY KEY,
+	email varchar(100),
+	login varchar(100),
+	senha varchar(100),
+	tipo varchar(20),
+	agencia varchar(20),
+	codigo varchar(20));
+
+	
+   create table endereco(
+        cpf varchar(14) PRIMARY KEY,
+	logradouro varchar(500),
+	cep varchar(9),
+	numero varchar(30),
+	complemento varchar(100),
+	cidade varchar(100),
+	uf varchar(2),
+	bairro varchar(100));
+
+   ALTER TABLE endereco ADD FOREIGN KEY (cpf) REFERENCES pessoa(cpf);
+
+   create table conta (
+        numero varchar(9) PRIMARY KEY,
+        saldo decimal,
+        cpf varchar(14),
+        tipo varchar(20));
+
+   ALTER TABLE conta ADD FOREIGN KEY (cpf) REFERENCES pessoa(cpf);
+   
+   create table movimentacao (
+		idmovimentacao serial unique,
+		datamovimentacao timestamp,
+		tipo varchar(20),
+		valor decimal,
+		numero varchar(9));
+		
+	ALTER TABLE movimentacao ADD FOREIGN KEY (numero) REFERENCES conta(numero);
+	
+	create table gerencia (
+		numero varchar(9),
+		codigo varchar(20),
+		PRIMARY KEY(numero, codigo));
+	
+       
