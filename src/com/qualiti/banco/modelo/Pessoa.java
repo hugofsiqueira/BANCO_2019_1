@@ -12,6 +12,7 @@ public abstract class Pessoa extends BancoEntity<String>{
 	private String senha;
 	private String telefone;
 	private String email;
+	private TipoPessoa tipo;
 	
 	public Pessoa(String nome, String cpf) {
 		this.nome = nome;
@@ -92,6 +93,14 @@ public abstract class Pessoa extends BancoEntity<String>{
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public TipoPessoa getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoPessoa tipo) {
+		this.tipo = tipo;
 	}
 
 }

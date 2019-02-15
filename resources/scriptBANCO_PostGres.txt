@@ -1,17 +1,19 @@
   
    create table pessoa(
 	nome varchar(300),
-    	cpf varchar(14) PRIMARY KEY,
+    cpf varchar(14) PRIMARY KEY,
 	email varchar(100),
 	login varchar(100),
 	senha varchar(100),
+	telefone varchar(20),
 	tipo varchar(20),
 	agencia varchar(20),
-	codigo varchar(20));
+	salario decimal,
+	matricula varchar(20));
 
 	
    create table endereco(
-        cpf varchar(14) PRIMARY KEY,
+    cpf varchar(14) PRIMARY KEY,
 	logradouro varchar(500),
 	cep varchar(9),
 	numero varchar(30),
