@@ -2,7 +2,7 @@ package com.qualiti.banco.fachada;
 
 import com.qualiti.banco.dados.ClienteDAO;
 import com.qualiti.banco.dados.ContaDAO;
-import com.qualiti.banco.dados.list.ClienteDAOListImpl;
+import com.qualiti.banco.dados.jdbc.ClienteDAOJDBCImpl;
 import com.qualiti.banco.dados.list.ContaDAOListImpl;
 import com.qualiti.banco.excecoes.BancoException;
 import com.qualiti.banco.modelo.Cliente;
@@ -21,7 +21,7 @@ public class Fachada implements IFachada {
 	
 	private Fachada() {
 		ContaDAO contaDAO = new ContaDAOListImpl();
-		ClienteDAO clienteDAO = new ClienteDAOListImpl();
+		ClienteDAO clienteDAO = new ClienteDAOJDBCImpl();
 		
 		negocioContas = new ContaBOImpl(contaDAO);
 		negocioClientes = new ClienteBOImpl(clienteDAO);

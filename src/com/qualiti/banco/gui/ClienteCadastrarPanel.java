@@ -19,6 +19,7 @@ import com.qualiti.banco.excecoes.BancoException;
 import com.qualiti.banco.fachada.Fachada;
 import com.qualiti.banco.modelo.Cliente;
 import com.qualiti.banco.modelo.Endereco;
+import com.qualiti.banco.modelo.TipoPessoa;
 import com.qualiti.banco.util.DateUtil;
 
 public class ClienteCadastrarPanel extends JPanel {
@@ -259,6 +260,7 @@ public class ClienteCadastrarPanel extends JPanel {
 					cliente.setSenha(senha);
 					cliente.setEmail(email);
 					cliente.setTelefone(telefone);
+					cliente.setTipo(TipoPessoa.CLIENTE);
 					
 					cliente.setEndereco(end);
 					
